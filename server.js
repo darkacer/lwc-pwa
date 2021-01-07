@@ -1,4 +1,11 @@
 'use strict';
+const fs = require('fs');
+var https = require('https');
+
+var privateKey = fs.readFileSync('key.pem');
+var certificate = fs.readFileSync('cert.pem');
+
+var credentials = { key: privateKey, cert: certificate };
 
 const express = require('express'),
     path = require('path'),
@@ -7,20 +14,51 @@ const express = require('express'),
     ENV = process.env.NODE_ENV || 'development',
     HOST = process.env.HOST || 'localhost',
     PORT = process.env.PORT || 3001,
-
     contacts = [
-        { id: 1, firstName: 'Amy', lastName: 'Taylor', phone: '(415) 256-8563' },
-        { id: 2, firstName: 'Michael', lastName: 'Jones', phone: '(415) 852-6633' },
-        { id: 3, firstName: 'Jennifer', lastName: 'Wu', phone: '(415) 852-1463' },
-        { id: 4, firstName: 'Anup', lastName: 'Gupta', phone: '(415) 852-6398' },
-        { id: 5, firstName: 'Caroline', lastName: 'Kingsley', phone: '(415) 875-3654' },
-        { id: 6, firstName: 'Jonathan', lastName: 'Bradley', phone: '(415) 888-5522' }
+        {
+            id: 1,
+            firstName: 'Amy',
+            lastName: 'Taylor',
+            phone: '(415) 256-8563'
+        },
+        {
+            id: 2,
+            firstName: 'Michael',
+            lastName: 'Jones',
+            phone: '(415) 852-6633'
+        },
+        {
+            id: 3,
+            firstName: 'Jennifer',
+            lastName: 'Wu',
+            phone: '(415) 852-1463'
+        },
+        {
+            id: 4,
+            firstName: 'Anup',
+            lastName: 'Gupta',
+            phone: '(415) 852-6398'
+        },
+        {
+            id: 5,
+            firstName: 'Caroline',
+            lastName: 'Kingsley',
+            phone: '(415) 875-3654'
+        },
+        {
+            id: 6,
+            firstName: 'Jonathan',
+            lastName: 'Bradley',
+            phone: '(415) 888-5522'
+        }
     ];
 
 if (ENV === 'production') {
     app.use((req, res, next) => {
         if (req.headers['x-forwarded-proto'] !== 'https') {
-            return res.redirect(['https://', req.get('Host'), req.url].join(''));
+            return res.redirect(
+                ['https://', req.get('Host'), req.url].join('')
+            );
         }
         return next();
     });
@@ -33,6 +71,15 @@ app.get('/api/contacts', (req, res) => {
     res.send(contacts);
 });
 
-app.listen(PORT, () =>
-    console.log(`✅ Server started: http://${HOST}:${PORT}`)
-);
+if (ENV === 'production') {
+    app.listen(PORT, () =>
+        console.log(`✅ Server started: http://${HOST}:${PORT}`, ENV)
+    );
+}
+
+if (ENV === 'development') {
+    var httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(PORT, () => {
+        console.log(`✅ Server started: https://${HOST}:${PORT}`, ENV);
+    });
+}
