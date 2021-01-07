@@ -1,11 +1,11 @@
 'use strict';
 const fs = require('fs');
-var https = require('https');
+// var https = require('https');
 
-var privateKey = fs.readFileSync('key.pem');
-var certificate = fs.readFileSync('cert.pem');
+// var privateKey = fs.readFileSync('key.pem');
+// var certificate = fs.readFileSync('cert.pem');
 
-var credentials = { key: privateKey, cert: certificate };
+// var credentials = { key: privateKey, cert: certificate };
 
 const express = require('express'),
     path = require('path'),
@@ -71,15 +71,15 @@ app.get('/api/contacts', (req, res) => {
     res.send(contacts);
 });
 
-if (ENV === 'production') {
-    app.listen(PORT, () =>
-        console.log(`✅ Server started: http://${HOST}:${PORT}`, ENV)
-    );
-}
+// if (ENV === 'production') {
+app.listen(PORT, () =>
+    console.log(`✅ Server started: http://${HOST}:${PORT}`, ENV)
+);
+// }
 
-if (ENV === 'development') {
-    var httpsServer = https.createServer(credentials, app);
-    httpsServer.listen(PORT, () => {
-        console.log(`✅ Server started: https://${HOST}:${PORT}`, ENV);
-    });
-}
+// if (ENV === 'development') {
+//     var httpsServer = https.createServer(credentials, app);
+//     httpsServer.listen(PORT, () => {
+//         console.log(`✅ Server started: https://${HOST}:${PORT}`, ENV);
+//     });
+// }

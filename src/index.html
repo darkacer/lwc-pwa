@@ -3,13 +3,13 @@
     <head>
         <title>LWC PWA Demo</title>
         <meta charset="utf-8" />
-        <meta name="description" content="A simple PWA application">
-        <meta name="keywords" content="LWC,workbox,pwa">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <meta name="theme-color" content="#317EFB">
-        <link rel="shortcut icon" href="/resources/favicon.ico">
-        <link rel="manifest" href="manifest.json">
-        <link rel="apple-touch-icon" href="resources/icons/icon-192x192.png">
+        <meta name="description" content="A simple PWA application" />
+        <meta name="keywords" content="LWC,workbox,pwa" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="theme-color" content="#317EFB" />
+        <link rel="shortcut icon" href="/resources/favicon.ico" />
+        <link rel="manifest" href="manifest.json" />
+        <link rel="apple-touch-icon" href="resources/icons/icon-192x192.png" />
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
         </style>
@@ -30,13 +30,19 @@
         </script>
 
         <div id="main"></div>
-        
+
         <script>
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
                     navigator.serviceWorker.register('/sw.js');
                 });
             }
+
+            let deferredPromt;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPromt = e;
+            });
         </script>
 
         <noscript>Javascript is required to run this application</noscript>

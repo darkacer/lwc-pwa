@@ -51,6 +51,7 @@
         "test:unit:coverage": "lwc-services test:unit --coverage",
         "test:unit:debug": "lwc-services test:unit --debug",
         "test:unit:watch": "lwc-services test:unit --watch",
-        "watch": "lwc-services watch -w scripts/webpack.config.js"
+        "watch": "lwc-services watch -w scripts/webpack.config.js",
+        "start": "node server"
     }
 }
