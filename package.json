@@ -6,7 +6,8 @@
     "bugs": "https://github.com/Christophe Coenraets/pwa-demo/issues",
     "dependencies": {
         "compression": "^1.7.4",
-        "express": "^4.17.1"
+        "express": "^4.17.1",
+        "navigo": "^8.7.3"
     },
     "devDependencies": {
         "eslint": "^6.8.0",
@@ -52,6 +53,8 @@
         "test:unit:debug": "lwc-services test:unit --debug",
         "test:unit:watch": "lwc-services test:unit --watch",
         "watch": "lwc-services watch -w scripts/webpack.config.js",
-        "start": "node server"
+        "start": "node server",
+        "create": "npm run build & npm run start",
+        "createDev": "npm run watch & npm run start"
     }
 }

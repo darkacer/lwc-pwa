@@ -1,14 +1,46 @@
 <template>
-    <div class="content">
-        <h1>Darkacer contacts</h1>
-        <template for:each={contacts} for:item="contact">
-            <div key={contact.id} class="contact">
-                <p>{contact.firstName} {contact.lastName}</p>
-                <p>{contact.phone}</p>
+    <nav role="navigation">
+        <div class="menuToggle">
+            <div style="display: inline-block;" class="hamburger">
+                <input type="checkbox" onclick={toogleMenu} />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul class="menu">
+                    <!-- <a href="#"><li>Home</li></a>
+                    <a href="#"><li>About</li></a>
+                    <a href="#"><li>Info</li></a>
+                    <a href="#"><li>Contact</li></a>
+                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
+                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
+                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
+                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
+                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a> -->
+
+                    <template for:each={menuItems} for:item="menuItem">
+                        <a
+                            key={menuItem.location}
+                            class="menu-item"
+                            href={menuItem.location}
+                            onclick={handleMenuItemClick}
+                        >
+                            <li>{menuItem.title}</li>
+                        </a>
+                        <br key={menuItem.location} />
+                    </template>
+                </ul>
             </div>
-        </template>
-    </div>
-    <button onclick={subscribeNotifcation}>Subscribe to Notification</button>
-    <button onclick={showNotification}>Show Notification</button>
-    {notifStatus}
+            <div class="headerText" style="display: inline-block;">
+                {roomname}
+            </div>
+        </div>
+    </nav>
+
+    <rcast-view
+        lwc:dynamic={view.component}
+        props={view.props}
+        onopenmenu={handleOpenMenuEvent}
+        onnavigate={handleNavigateEvent}
+        class="container"
+    ></rcast-view>
 </template>
