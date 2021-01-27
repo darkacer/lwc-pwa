@@ -2,26 +2,22 @@
     <nav role="navigation">
         <div class="menuToggle">
             <div style="display: inline-block;" class="hamburger">
-                <input type="checkbox" onclick={toogleMenu} />
+                <input
+                    type="checkbox"
+                    onclick={toogleMenu}
+                    value={menuOpen}
+                    class="checkBox"
+                />
                 <span></span>
                 <span></span>
                 <span></span>
                 <ul class="menu">
-                    <!-- <a href="#"><li>Home</li></a>
-                    <a href="#"><li>About</li></a>
-                    <a href="#"><li>Info</li></a>
-                    <a href="#"><li>Contact</li></a>
-                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
-                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
-                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
-                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
-                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a> -->
-
                     <template for:each={menuItems} for:item="menuItem">
                         <a
                             key={menuItem.location}
                             class="menu-item"
                             href={menuItem.location}
+                            data-location={menuItem.location}
                             onclick={handleMenuItemClick}
                         >
                             <li>{menuItem.title}</li>
@@ -35,7 +31,6 @@
             </div>
         </div>
     </nav>
-
     <rcast-view
         lwc:dynamic={view.component}
         props={view.props}

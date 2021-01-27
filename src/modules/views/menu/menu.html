@@ -1,0 +1,14 @@
+<template>
+    <template for:each={menuItems} for:item="menuItem">
+        <a
+            key={menuItem.location}
+            class="menu-item"
+            href={menuItem.location}
+            data-location={menuItem.location}
+            onclick={handleMenuItemClick}
+        >
+            <li>{menuItem.title}</li>
+        </a>
+        <br key={menuItem.location} />
+    </template>
+</template>

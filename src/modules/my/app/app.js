@@ -63,21 +63,23 @@ export default class App extends LightningElement {
         });
 
         const navigateToDefault = () => {
-            this.router.navigate('/podcasts');
+            this.router.navigate('/');
         };
 
         this.router.notFound(navigateToDefault);
         this.router.on(navigateToDefault);
 
-        this.router.resolve();
+        // this.router.resolve();
     }
 
     handleMenuItemClick(event) {
         event.preventDefault();
-        const { href } = event.target;
-        console.log('before event', event.target.href, href);
-        this.router.navigate('/podcasts', true);
-        // this.template.querySelector('base-menu').close();
+        // const { href, key } = event.target;
+        const { location } = event.currentTarget.dataset;
+        // console.log('before event', location,  'pod');
+        this.toogleMenu();
+        this.template.querySelector('.checkBox').checked = false;
+        this.router.navigate(location, true);
     }
 
     setView(component, props = {}) {
